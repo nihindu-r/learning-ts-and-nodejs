@@ -14,7 +14,7 @@ const PetSchema = new mongoose.Schema({
     photoURLs :{
         type: [String], //TODO: Fix this typing to be a mapping
         required: false,
-        unique: [true, "Photo URLs must be unique"]
+        unique: false //If these must be unique, they must also be required
 
     },
 
