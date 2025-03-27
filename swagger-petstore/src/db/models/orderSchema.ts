@@ -6,10 +6,11 @@ enum OrderStatus{
 };
 
 const OrderSchema = new mongoose.Schema({
-    id :{
+    _id :{
         type: Number,
-        required: [true, "ID is a required field"],
-        unique: [true, "ID must be unique"]
+        // Can't specify it, _id must have these properties, can't be modified
+        // required: [true, "ID is a required field"],
+        // unique: [true, "ID must be unique"]
     },
     petId :{
         type: String,
