@@ -1,0 +1,42 @@
+import mongoose from "mongoose";
+enum OrderStatus{
+    Placed,
+    Approved,
+    Delivered
+};
+
+const OrderSchema = new mongoose.Schema({
+    id :{
+        type: Number,
+        required: [true, "ID is a required field"],
+        unique: [true, "ID must be unique"]
+    },
+    petId :{
+        type: String,
+        required: [true, "petId is a required field"],
+        unique: [true, "petId must be unique"]
+    },
+    quantity :{
+        type: Number,
+        required: [true, "Provide a quantity"],
+        unique: false
+    },
+    shipDate :{
+        type: Date,
+        required: false,
+        unique: false
+    },
+    status :{
+        type: OrderStatus,
+        required: [true, "Status is a required field"],
+        unique: false
+    },
+
+    complete :{
+        type: Boolean,
+        required: [true, "Order completion is a required field"],
+        unique: false
+    }
+})
+
+export default mongoose.model('Orders', OrderSchema)
