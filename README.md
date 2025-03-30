@@ -1,5 +1,8 @@
 # learning-ts-and-nodejs
-Repo for me to learn Typescript and NodeJS
+Repo for me to learn Typescript and NodeJS. This project implements the API found here: https://petstore.swagger.io/#/, in TypeScript, using NodeJS and an Express framework. It also uses Mongoose to connect to and update MongoDB and is currently using Postman to verify that items are working as intended, with the goal of 
+moving tests in Mocha or Chai.
+
+
 To start: `npm run dev`
 
 TODO table
@@ -9,7 +12,7 @@ TODO table
 | pet         | /pet/{petID}             | `GET`    | Find an existing pet by ID                   | Path (petID String to cast to Integer number)                                                                      | 200 (Pet found)  OR 400 (Invalid ID supplied)  OR 404 (Pet not found)                                        | Add error handling for 400 and 404 (invalid ID supplied and pet not found)    |
 | pet         | /pet/{petID}             | `DELETE` | Delete an existing pet by ID                 | Path (petID String to cast to Integer number) AND Header (API key - this will be extension work for me)            | 200 (Pet deleted)  OR 400 (Invalid ID supplied)  OR 404 (Pet not found)                                      | Add error handling for 400 (invalid ID supplied). API Key is EXTENSION        |
 | pet         | /pet                     | `PUT`    | Updates an existing pet                      | Body (petSchema Object)                                                                                            | 200 (Pet updated) OR 404 (Pet not found) OR 405 invalid input (pet added doesn't meet validation rule)        | Add error handling for 400 (invalid ID supplied)                                |
-| pet         | /pet/findByStatus        | `GET`    | Finds Pets by status                         | Body (Array<Status (String)>)                                                                                      | 200 (Pet(s) found) OR 400 (invalid status)                                                                    | Current checking isn't catching incorrectly typed                            |
+| pet         | /pet/findByStatus        | `GET`    | Finds Pets by status                         | Body (Array<Status (String)>)                                                                                      | 200 (Pet(s) found) OR 400 (invalid status)                                                                    | Current checking isn't catching invalid status                           |
 | pet         | /pet/{petId}             | `POST`   | Updates a pet in the store with form data    | Path (petID String to cast to Integer number) AND formData??? Don't really understand how the form data works here | 200 (Pet updated) OR 404 (Pet not found) OR 405 invalid input (pet modification doesn't meet validation rule) | Implement - EXTENSION                                                         |
 | pet         | /pet/{petId}/uploadImage | `POST`   | Uploads an image                             | Path (petID String to cast to Integer number) AND file (formData)                                                  | 200 (successful operation - would also need to add URL to specified petID)                                   | Implement - EXTENSION                                                         |
 | store       | /store/order             | `POST`   | Place an order for a pet                     | Body (orderSchema Object)                                                                                          | 200 (Order created) OR 400 (invalid order)                                                                   | Implement                                                                     |
