@@ -13,7 +13,6 @@ app.use(express.json());
 // Handle pet requests
 app.use('/pet',petRouter);
 
-
 // Handle store requests
 // Hand user requests
 

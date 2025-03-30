@@ -5,7 +5,37 @@ import petSchema from "../db/models/petSchema";
 
 
 const petRouter = express.Router();
-// Find by petID - 
+
+petRouter.get('/findByStatus', async (req,res) => {
+    // Insert some validation rule checking here
+    try {
+        const filterList : Array<{status : String}> = [];
+
+        req.body.statusArray.forEach((statusToMatch : String ) => {
+            filterList.push({status : statusToMatch})
+        });
+
+        const pets = await petSchema.find({ $or : filterList});
+
+        if (pets === null){
+            console.log("No pets found with the listed statuses")
+        } else {
+            res.status(200).json(pets)
+        }
+
+    } catch (error) {
+        // Pet not found
+        const unknownErrorMessage = "Unknown Error"
+        if (error instanceof Error){
+            res.status(404).json({message: error.message})
+        } else {
+            res.status(400).json({message: unknownErrorMessage})
+        }
+    }
+
+}
+)
+
 petRouter.get('/:id', async (req,res) => {
     try {
         const petId = Number(req.params.id)
@@ -26,7 +56,7 @@ petRouter.get('/:id', async (req,res) => {
 petRouter.delete('/:id', async (req,res) => {
     try {
         const petId = Number(req.params.id)
-        // TODO: Add error handling for 400 (invalid id suppllied)
+        // TODO: Add error handling for 400 (invalid id supplied)
         const pet = await petSchema.findById(petId)
         if (pet === null){
             res.status(404).json({message: "Pet not found"})
@@ -57,7 +87,7 @@ petRouter.post('/', async (req,res) => {
         const newPet = pet.save()
         res.status(201).json(newPet)
     } catch (error) {
-        let unknownErrorMessage = "Unknown Error"
+        const unknownErrorMessage = "Unknown Error"
         if (error instanceof Error){
             res.status(400).json({message: error.message})
         } else {
@@ -67,6 +97,33 @@ petRouter.post('/', async (req,res) => {
 
 })
 
+// TODO add error 405 handling
+petRouter.put('/', async (req,res) => {
+    // Insert some validation rule checking here
+    try {
+        let pet = await petSchema.findById(req.body.id);
+        if (pet === null){
+            console.log("No pet found with that ID")
+        } else {
+            pet.name = req.body.name;
+            pet.status = req.body.status;
+            await pet.save()
+            res.status(200).json({message : "Successfully updated pet", updatedPet : pet})
+        }
+
+    } catch (error) {
+        // Pet not found
+        const unknownErrorMessage = "Unknown Error"
+        if (error instanceof Error){
+            res.status(404).json({message: error.message})
+        } else {
+            res.status(400).json({message: unknownErrorMessage})
+        }
+    }
+
+}
+
+)
 
 
 
