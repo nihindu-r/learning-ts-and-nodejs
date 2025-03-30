@@ -1,12 +1,30 @@
 # learning-ts-and-nodejs
 Repo for me to learn Typescript and NodeJS
 To start: `npm run dev`
+
+TODO table
+| Base router | Route                    | Verb     | Action                                    | Input                                                                                                                   | Output                                                                                                       | TODO                                                                          |
+|-------------|--------------------------|----------|-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| pet         | /pet                     | `POST`   | Add a new pet to the store.               | Body (petSchema Object)                                                                                                 | 200 (Pet added) OR 405 invalid input (pet added doesn't meet validation rule                                 | Fix so that failing validation doesn't kill the app and instead returns a 405 |
+| pet         | /pet/{petID}             | `GET`    | Find an existing pet by ID                | Parameter (petID String to cast to Integer number)                                                                      | 200 (Pet found) OR 400 (Invalid ID supplied) OR 404 (Pet not found)                                          | Add error handling for 400 and 404 (invalid ID supplied and pet not found)    |
+| pet         | /pet/{petID}             | `DELETE` | Delete an existing pet by ID              | Parameter (petID String to cast to Integer number) AND Header (API key - this will be extension work for me)            | 200 (Pet deleted) OR 400 (Invalid ID supplied) OR 404 (Pet not found)                                        | Add error handling for 400 (invalid ID supplied). API Key is EXTENSION        |
+| pet         | /pet                     | `PUT`    | Updates an existing pet                   | Body (petSchema Object)                                                                                                 | 200 (Pet updated) OR 404 (Pet not found) OR 405 invalid input (pet added doesn't meet validation rule        | Implement                                                                     |
+| pet         | /pet/findByStatus        | `GET`    | Finds Pets by status                      | Body (Array<Status (String)>)                                                                                           | 200 (Pet(s) found) OR 400 (invalid status)                                                                   | Implement                                                                     |
+| pet         | /pet/{petId}             | `POST`   | Updates a pet in the store with form data | Parameter (petID String to cast to Integer number) AND formData??? Don't really understand how the form data works here | 200 (Pet updated) OR 404 (Pet not found) OR 405 invalid input (pet modification doesn't meet validation rule | Implement - EXTENSION                                                         |
+| pet         | /pet/{petId}/uploadImage | `POST`   | Uploads an image                          | Parameter (petID String to cast to Integer number) AND file (formData)                                                  | 200 (successful operation - would also need to add URL to specified petID)                                   | Implement - EXTENSION                                                         |
+| store       | /store/order             | `POST`   | Place an order for a pet                  | Body (orderSchema Object)                                                                                               | 200 (Order created) OR 400 (invalid order)                                                                   | Implement                                                                     |
+| store       | /store/order/{petID}     | `GET`    | Find purchase order by petID              | Parameter (petID String to cast to Integer number)                                                                      | 200 (Order found) OR 400 (Invalid ID supplied) OR 404 (Order not found)                                      | Implement                                                                     |
+| store       | /store/order/{orderID}   | `DELETE` | Delete purchase order by ID               | Parameter (orderID String to cast to positive Integer number)                                                           | 200 (Order deleted) OR 400 (Invalid ID supplied) OR 404 (Order not found)                                    | Implement                                                                     |
+| store       | /store/inventory         | `GET`    | Returns pet inventories by status         | No parameters                                                                                                           | 200 (Returns a map of status codes to quantities)                                                            | Implement                                                                     |
+| user        |                          |          |                                           |                                                                                                                         |                                                                                                              |                                                                               |
+
+
 Test bodies (for Postman):
 
-/pet
+`/pet
 POST:
 {
   "id": 0,
   "name": "doggie",
   "status": "Available"
-}
+}`
