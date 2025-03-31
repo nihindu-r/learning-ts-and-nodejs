@@ -1,9 +1,4 @@
 import mongoose from "mongoose";
-enum OrderStatus{
-    Placed,
-    Approved,
-    Delivered
-};
 
 const OrderSchema = new mongoose.Schema({
     _id :{
@@ -28,7 +23,9 @@ const OrderSchema = new mongoose.Schema({
         unique: false
     },
     status :{
-        type: OrderStatus,
+        type: String,
+        enum: ["Placed" , "Approved" , "Delivered"],
+        default : "Available",
         required: [true, "Status is a required field"],
         unique: false
     },

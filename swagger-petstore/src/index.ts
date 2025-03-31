@@ -14,6 +14,8 @@ app.use(express.json());
 app.use('/pet',petRouter);
 
 // Handle store requests
+app.use('/store',storeRouter);
+
 // Hand user requests
 
 app.listen(3000, () => {

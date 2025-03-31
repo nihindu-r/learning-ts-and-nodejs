@@ -47,3 +47,15 @@ GET
 {
     "statusArray" : ["Pending", "Available"]
 }
+
+
+`/store/order
+POST 
+{
+  "id": 0,
+  "petId": 0,
+  "quantity": 0,
+  "shipDate": "2025-03-31T05:40:50.915Z",
+  "status": "placed",
+  "complete": true
+}`
